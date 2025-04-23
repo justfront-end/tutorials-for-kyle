@@ -1,0 +1,62 @@
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+}
+
+header {
+	background-color: #333;
+	color: white;
+	padding: 10px;
+	text-align: center;
+	cursor: pointer;
+}
+
+#surfboards-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	gap: 16px;
+	padding: 20px;
+}
+
+.surfboard-card {
+	border: 1px solid #ccc;
+	padding: 10px;
+	text-align: center;
+}
+
+.surfboard-card img {
+	width: 100%;
+	height: auto;
+}
+
+.selected {
+	border: 2px solid blue;
+}
+
+button {
+	margin-top: 10px;
+	padding: 8px 12px;
+	cursor: pointer;
+}
+
+
+#cart-page {
+	display: flex;
+	padding: 20px;
+	gap: 20px;
+}
+
+#cart-list {
+	flex: 2;
+}
+
+#checkout-form {
+	flex: 1;
+	border-left: 1px solid #ccc;
+	padding-left: 20px;
+}
+
+form div {
+	margin-bottom: 10px;
+}
