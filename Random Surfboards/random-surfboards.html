@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Surfboard Gallery</title>
+	<style>
+		body {
+			font-family: sans-serif;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			padding: 20px;
+		}
+
+		img {
+			max-width: 400px;
+			border: 2px solid #333;
+			margin-bottom: 10px;
+		}
+
+		.buttons {
+			margin-bottom: 10px;
+		}
+
+		button {
+			margin: 0 5px;
+			padding: 8px 12px;
+			cursor: pointer;
+		}
+
+		#details {
+			font-size: 0.9em;
+			color: #555;
+		}
+	</style>
+	<script>
+
+
+
+		const myBooks = [
+			"book 1",
+			"book 2",
+			"book 3",
+			{
+				oldBooks: "super old book"
+			},
+			{
+				newBooks: "super new book"
+			}
+		]
+
+		myBooks[2] = "Other cool book";
+
+
+		console.log(myBooks);
+
+
+		const myTasks = {
+			
+			name: "Justin",
+			style: "Awesome"
+
+		}
+
+
+		console.log(myTasks.style);
+
+
+
+		// 1. const: our surfboard "database" never gets reassigned
+		const surfboards = [
+			{ name: 'Shortboard', file: 'board-1.jpg', volume: '30 L' },
+			{ name: 'Longboard', file: 'board-2.jpg', volume: '60 L' },
+			{ name: 'Fish', file: 'board-3.jpg', volume: '40 L' },
+			{ name: 'Funboard', file: 'board-4.jpg', volume: '50 L' },
+			{ name: 'Egg', file: 'board-5.jpg', volume: '45 L' },
+			{ name: 'Gun', file: 'board-6.jpg', volume: '35 L' },
+			{ name: 'Mini Mal', file: 'board-7.jpg', volume: '55 L' },
+			{ name: 'Hybrid', file: 'board-8.jpg', volume: '42 L' },
+			{ name: 'High-Performance', file: 'board-9.jpg', volume: '32 L' },
+			{ name: 'Skate Fin', file: 'board-10.jpg', volume: '38 L' },
+			{ name: 'Tow Board', file: 'board-11.jpg', volume: '65 L' },
+			{ name: 'Soft Top', file: 'board-12.jpg', volume: '58 L' }
+		];
+
+		// 2. let: this index WILL change as we click buttons
+		let currentIndex = 0;
+
+		// 3. updateImage(): a reusable function that applies the current surfboard
+		function updateImage() {
+			const img = document.getElementById('boardImage');
+			img.src = 'images/' + surfboards[currentIndex].file;
+			img.alt = surfboards[currentIndex].name;
+			// clear any old details when image changes
+			document.getElementById('details').textContent = '';
+		}
+
+		// 4. nextSurfboard(): advance index, wrap around
+		function nextSurfboard() {
+			currentIndex = (currentIndex + 1) % surfboards.length;
+			updateImage();
+		}
+
+		// 5. prevSurfboard(): go back, wrap around
+		function prevSurfboard() {
+			currentIndex = (currentIndex - 1 + surfboards.length) % surfboards.length;
+			updateImage();
+		}
+
+		// 6. randomSurfboard(): pick any board at random
+		function randomSurfboard() {
+			currentIndex = Math.floor(Math.random() * surfboards.length);
+			updateImage();
+		}
+
+		// 7. showDetails(): read properties off the current object
+		function showDetails() {
+			const board = surfboards[currentIndex];
+			const detailsDiv = document.getElementById('details');
+			detailsDiv.innerHTML = `
+        <strong>Name:</strong> ${board.name}<br>
+        <strong>Volume:</strong> ${board.volume}<br>
+        <strong>File:</strong> ${board.file}
+      `;
+		}
+
+		// 8. on page load, set initial image
+		window.addEventListener('DOMContentLoaded', updateImage);
+	</script>
+</head>
+
+<body>
+	<h1>Surfboard Gallery</h1>
+	<!-- the image we'll swap out -->
+	<img id="boardImage" src="" alt="Surfboard">
+
+	<div class="buttons">
+		<button onclick="prevSurfboard()">Previous</button>
+		<button onclick="nextSurfboard()">Next</button>
+		<button onclick="randomSurfboard()">Random</button>
+		<button onclick="showDetails()">Show Details</button>
+	</div>
+
+	<!-- details about the current surfboard go here -->
+	<div id="details"></div>
+</body>
+
+</html>
